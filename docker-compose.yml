@@ -1,0 +1,20 @@
+services:
+  fastapi:
+    image: cairditas/fastapi:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "8000:8000"
+    environment:
+      - API_URL=http://fastapi:8000
+    container_name: fastapi
+
+  streamlit:
+    image: cairditas/streamlit:v1
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    container_name: streamlit
