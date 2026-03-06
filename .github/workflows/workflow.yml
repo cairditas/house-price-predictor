@@ -167,6 +167,16 @@ jobs:
               sleep 5
             fi
           done
+
+      - name: Show container status & logs
+        if: always()                     
+        run: |
+          docker ps -a
+          docker logs test-api --tail 200
+          echo "Processes inside container:"
+          docker exec test-api ps aux || true
+          echo "Listening ports inside container:"
+          docker exec test-api sh -c 'netstat -tuln 2>/dev/null || ss -tuln 2>/dev/null || echo "netstat/ss not available"' || true
       
       - name: Clean Up Test Container
         run: |
