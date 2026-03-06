@@ -25,17 +25,19 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Data Processing Tests
+      working-directory: src/data
       run: |
-        python src/data/run_processing.py \
-          --input data/raw/house_data.csv   \
-          --output data/processed/cleaned_house_data.csv
+        python ./run_processing.py \
+          --input ./raw/house_data.csv   \
+          --output ./processed/cleaned_house_data.csv
     
     - name: Do Feature Engineering
+      working-directory: src/features
       run: |
-        python src/features/run_feature_engineering.py \
-          --input data/processed/cleaned_house_data.csv \
-          --output data/features/featured_house_data.csv \
-          --preprocessor models/trained/preprocessor.pkl
+        python ./run_feature_engineering.py \
+          --input ../../data/processed/cleaned_house_data.csv \
+          --output ../../data/processed/featured_house_data.csv \
+          --preprocessor ../../models/trained/preprocessor.pkl
 
     - name: Train Model
       run: |
