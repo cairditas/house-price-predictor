@@ -24,6 +24,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Show workspace env
+      run: echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+      
     - name: Run Data Processing Tests
       working-directory: src/data
       run: |
